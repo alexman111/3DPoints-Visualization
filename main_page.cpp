@@ -17,7 +17,7 @@ MainPage::~MainPage()
 void MainPage::OnGenerate() {
     try {
         PointsGenerator generator;
-        generator.Generate("C:\\Users\\sanch\\Documents\\QT_Projects\\3DCoordinates\\input.txt", 1000000);
+        generator.Generate("C:\\Users\\sanch\\Documents\\input.txt", 1000000);
     } catch (std::exception &e) {
     }
 

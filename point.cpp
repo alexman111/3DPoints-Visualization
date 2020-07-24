@@ -7,9 +7,9 @@ Point::Point()
 }
 
 void Point::Next() {
-    x = rand() % MAX_RAND_VALUE;
-    y = rand() % MAX_RAND_VALUE;
-    z = rand() % MAX_RAND_VALUE;
+    x = (rand() * rand()) % MAX_RAND_VALUE;
+    y = (rand() * rand()) % MAX_RAND_VALUE;
+    z = (rand() * rand()) % MAX_RAND_VALUE;
 
 }
 

@@ -19,12 +19,14 @@ SOURCES += \
     main.cpp \
     main_page.cpp \
     point.cpp \
-    points_generator.cpp
+    points_generator.cpp \
+    viewer.cpp
 
 HEADERS += \
     main_page.h \
     point.h \
-    points_generator.h
+    points_generator.h \
+    viewer.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -33,3 +35,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     input.txt
+
+CONFIG *= qt opengl release
+QT *= opengl xml
+
+#windows path to lib
+INCLUDEPATH *= C:/Users/sanch/Documents/libQGLViewer-2.7.2
+LIBS *= -LC:/Users/sanch/Documents/libQGLViewer-2.7.2/QGLViewer -lQGLViewer2
+LIBS += -lOpengl32
