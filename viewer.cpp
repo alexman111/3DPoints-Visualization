@@ -1,5 +1,7 @@
 #include "viewer.h"
 
+
+
 void Viewer::init() {
 
   setMouseBinding(Qt::NoModifier, Qt::LeftButton, QGLViewer::CAMERA,
@@ -10,24 +12,7 @@ void Viewer::init() {
                   QGLViewer::ZOOM);
   setWheelBinding(Qt::NoModifier, QGLViewer::CAMERA, QGLViewer::ZOOM);
 
-  QFile file("C:\\Users\\sanch\\Documents\\input.txt");
-  if (!file.open(QIODevice::ReadOnly)) {
-      qWarning("Cannot open file for reading");
-      exit(1);
-  }
-  QTextStream in(&file);
 
-  while(!in.atEnd()) {
-     qreal x, y, z;
-     in >> x >> y >> z;
-     x /= MAX_RAND_VALUE;
-     y /= MAX_RAND_VALUE;
-     z /= MAX_RAND_VALUE;
-     points.push_back(qglviewer::Vec(x, y, z));
-  }
-  std::sort(points.begin(), points.end(), [](const qglviewer::Vec& v1, const qglviewer::Vec& v2) {
-      return v1.z < v2.z;
-  });
 
 #ifdef GL_RESCALE_NORMAL // OpenGL 1.2 Only...
   glEnable(GL_RESCALE_NORMAL);
@@ -36,7 +21,6 @@ void Viewer::init() {
   setSceneRadius(30);
   camera()->fitSphere(qglviewer::Vec(0, 0, 0), 1);
 
-  restoreStateFromFile();
 }
 
 void Viewer::draw() {
@@ -62,5 +46,30 @@ void Viewer::draw() {
 
   glEnd();
 
+}
+
+void Viewer::InitPoints(const QString &filename) {
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly)) {
+        throw std::runtime_error("Can't open file for reading");
+    }
+
+    QTextStream in(&file);
+
+    points.clear();
+    while(!in.atEnd()) {
+       qreal x, y, z;
+       in >> x >> y >> z;
+       x /= MAX_RAND_VALUE;
+       y /= MAX_RAND_VALUE;
+       z /= MAX_RAND_VALUE;
+
+       points.push_back(qglviewer::Vec(x, y, z));
+    }
+    std::sort(points.begin(), points.end(), [](const qglviewer::Vec& v1, const qglviewer::Vec& v2) {
+        return v1.z < v2.z;
+    });
+
+    draw();
 
 }

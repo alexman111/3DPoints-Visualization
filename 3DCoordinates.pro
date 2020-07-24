@@ -36,10 +36,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     input.txt
 
+#OpenGl
 CONFIG *= qt opengl release
 QT *= opengl xml
 
-#windows path to lib
+#windows path to libQGLViewer
 INCLUDEPATH *= C:/Users/sanch/Documents/libQGLViewer-2.7.2
 LIBS *= -LC:/Users/sanch/Documents/libQGLViewer-2.7.2/QGLViewer -lQGLViewer2
+
+#OpenGl
 LIBS += -lOpengl32

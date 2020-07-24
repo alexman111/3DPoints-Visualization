@@ -12,6 +12,9 @@
 class Viewer : public QGLViewer {
 protected:
   virtual void init();
+
+public:
+  void InitPoints(const QString& filename);
   virtual void draw();
 private:
     std::vector<qglviewer::Vec> points;
