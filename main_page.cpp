@@ -70,10 +70,13 @@ void MainPage::OnChoice() {
 void MainPage::OnDraw() {
     QMessageBox msgBox;
     try {
+        this->setCursor(Qt::WaitCursor);
         v->InitPoints(filename);
+        this->setCursor(Qt::ArrowCursor);
         msgBox.setText("Succesfully visualizate!");
         msgBox.exec();
     } catch (std::exception& e) {
+        this->setCursor(Qt::ArrowCursor);
         msgBox.setText(e.what());
         msgBox.exec();
     }
